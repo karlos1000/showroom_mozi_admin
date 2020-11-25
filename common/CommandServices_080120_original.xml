@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Commands>
+   <!--Consultas roles -->
+   <Command id="GetAllRoles">
+    <query>SELECT * FROM roles</query>
+   </Command>
+   <Command id="obtenerRolByIdDB">
+        <query>SELECT * FROM roles WHERE idRol=?</query>
+   </Command>
+   <Command id="updateRolGrid">
+     <query>UPDATE roles SET rol='@rol' WHERE idRol=@idRol </query>
+   </Command>
+   <Command id="insertRolGrid">
+     <query>INSERT INTO roles (rol, fechaCreacion) VALUES ('@rol', NOW())</query>
+   </Command>
+   <Command id="deleteRolesGrid">
+     <query>DELETE FROM roles WHERE idRol=@idRol </query>
+   </Command>
+
+
+   <!--Consultas usuarios -->
+  <Command id="LoginUser">
+    <query>SELECT * FROM usuarios WHERE email='?' AND password='?'</query>
+  </Command>   
+  <Command id="UserByID">
+    <query>SELECT * FROM usuarios WHERE idUsuario=?</query>
+  </Command>   
+  <Command id="getUsersForGrid">
+    <query> 
+      SELECT A.*, 
+      IF(A.activo=1,'Si','No') AS usuarioActivo,
+      IF(A.activo=1,'desactivar.png','activar.jpg') AS nombreImg      
+      FROM usuarios A       
+      ORDER BY A.idRol
+    </query>
+  </Command>
+  <Command id="updateUserGrid">
+    <query>UPDATE usuarios SET idRol='@idRol', nombre='@nombre', email='@email', password='@password', agenciaId=@agenciaId WHERE idUsuario=@idUsuario </query>
+  </Command>
+  <Command id="deleteUserGrid">
+    <query>DELETE FROM usuarios WHERE idUsuario=@idUsuario </query>
+  </Command>
+  <Command id="insertUserGrid">
+    <query>INSERT INTO usuarios (idRol, nombre, email, password, agenciaId, fechaCreacion) VALUES ('@idRol','@nombre', '@email', '@password', @agenciaId, NOW())</query>
+  </Command>
+  <Command id="obtTodosUsuariosDB">
+    <query>
+      SELECT a.*, b.enlaceCot, b.enlaceBank, b.urlsActivas 
+      FROM usuarios AS a
+      LEFT JOIN cat_agencias AS b on b.agenciaId=a.agenciaId
+    </query>
+  </Command>
+  <Command id="UserByEmailDB">
+    <query>SELECT * FROM usuarios WHERE email='?' limit 0,1</query>
+   </Command>
+
+  
+
+   <!--Consultas cat galerias -->
+  <Command id="ObtTodosCatGaleriasDB">
+    <query>SELECT *, IF(galeriaId=20,'oculto','') as classInactivo FROM cat_galerias </query>
+  </Command>
+  <Command id="ActCatGaleriaGrid">
+    <query>UPDATE cat_galerias SET nombre='@nombre', activo='@activo' WHERE galeriaId=@galeriaId</query>
+  </Command>
+  <Command id="insertCatGaleriaGrid">
+    <query>INSERT INTO cat_galerias (nombre, activo, fechaCreacion) VALUES ('@nombre', '@activo', NOW())</query>
+  </Command>
+  <Command id="eliminarCatGaleriaGrid">
+    <query>DELETE FROM cat_galerias WHERE galeriaId=@galeriaId </query>
+  </Command>
+  <Command id="ObtGaleriaPorIdDB">
+    <query>SELECT * FROM cat_galerias WHERE galeriaId=?</query>
+  </Command>
+  <Command id="agregarGaleriaDB">
+    <query>INSERT INTO cat_galerias (nombre, activo, fechaCreacion) VALUES ('?', ?, NOW())</query>
+  </Command>
+
+  
+  <!--Consultas cat concepto precios -->
+  <Command id="ObtTodosCatConceptoPreciosDB">
+    <query>SELECT * FROM cat_concepto_precios </query>
+  </Command>
+  <Command id="ActCatConceptoPrecioGrid">
+    <query>UPDATE cat_concepto_precios SET concepto='@concepto', activo='@activo' WHERE concPrecioId=@concPrecioId</query>
+  </Command>
+  <Command id="insertCatConceptoPrecioGrid">
+    <query>INSERT INTO cat_concepto_precios (concepto, activo, fechaCreacion) VALUES ('@concepto', '@activo', NOW())</query>
+  </Command>
+  <Command id="eliminarCatConceptoPrecioGrid">
+    <query>DELETE FROM cat_concepto_precios WHERE concPrecioId=@concPrecioId </query>
+  </Command>
+
+
+  <!--Consultas cat concepto planes -->
+  <Command id="ObtTodosCatConceptoPlanesDB">
+    <query>SELECT * FROM cat_concepto_planes </query>
+  </Command>
+  <Command id="actCatConceptoPlanGrid">
+    <query>UPDATE cat_concepto_planes SET plan='@plan', activo='@activo' WHERE planId=@planId</query>
+  </Command>
+  <Command id="insertCatConceptoPlanGrid">
+    <query>INSERT INTO cat_concepto_planes (plan, activo, fechaCreacion) VALUES ('@plan', '@activo', NOW())</query>
+  </Command>
+  <Command id="eliminarCatConceptoPlanGrid">
+    <query>DELETE FROM cat_concepto_planes WHERE planId=@planId </query>
+  </Command>
+  
+
+  <!--Consultas gama de modelos -->
+  <Command id="ObtTodosGamaModelosDB">
+    <query>SELECT *, IF(activo=1,'oculto','') as classActivo, IF(activo=0,'oculto','') as classInactivo FROM gama_modelos ?</query>
+  </Command>
+  <Command id="InsertGamaModeloDB">
+    <query>INSERT INTO gama_modelos (modelo, anio, imagen, activo, eslogan, camion, nuevo, mostrarAnio, fechaCreacion) VALUES ('?', ?, '?', '?', '?', '?', '?', '?', '?')</query>
+  </Command>
+  <Command id="ActGamaModeloDB">
+    <query>UPDATE gama_modelos SET modelo='?', anio=?, imagen='?', activo='?', eslogan='?', camion='?', nuevo='?', mostrarAnio='?'  WHERE gModeloId=?</query>
+  </Command>
+  <Command id="ObtDatosGModeloPorIdDB">
+    <query>SELECT * FROM gama_modelos WHERE gModeloId=?</query>
+  </Command>
+  <Command id="ActivaDesactivaGModeloDB">
+    <query>UPDATE gama_modelos SET activo='?' WHERE gModeloId=?</query>
+  </Command>
+  
+  <Command id="ActCampoGamaModeloDB">
+    <query>UPDATE gama_modelos SET ?='?' WHERE gModeloId=?</query>
+  </Command>
+  <Command id="EliminarGamaModeloDB">
+    <query>DELETE FROM gama_modelos WHERE gModeloId IN (?)</query>
+  </Command>
+  <Command id="OrdenarModelosDB">
+    <query>UPDATE gama_modelos SET orden=? WHERE gModeloId=?</query>
+  </Command>
+  
+  
+
+
+  
+  <!--Consultas versiones generales -->
+  <Command id="versionGeneralPorIdDB">
+    <query>SELECT * FROM version_generales WHERE gralVersId=?</query>
+  </Command>
+  <Command id="ObtTodosVersionesGeneralesDB">
+    <query>SELECT *, IF(activo=1,'oculto','') as classActivo, IF(activo=0,'oculto','') as classInactivo FROM version_generales ?</query>
+  </Command>
+  <Command id="ObtVersionesGeneralesDB">
+    <query>SELECT * FROM version_generales ?</query>
+  </Command>
+
+  <Command id="ActCampoVersionGralDB">
+    <query>UPDATE version_generales SET ?='?' WHERE gralVersId=?</query>
+  </Command>
+
+  <Command id="InsertVersionGralDB">
+    <query>INSERT  INTO version_generales(gModeloId, version, precioInicial, caracteristicas, imagen, urlPdf, sAutomotriz, sVida, sDesempleo, codigoVersion, sGarantiaExt, fechaCreacion) VALUES(?, '?', ?, '?', '?', '?', ?, ?, ?, '?', ?, '?')</query>
+  </Command>
+  
+  <Command id="ActVersionGralDB">
+    <query>UPDATE version_generales SET gModeloId=?, version='?', precioInicial=?, caracteristicas='?', imagen='?', urlPdf='?', sAutomotriz=?, sVida=?, sDesempleo=?, codigoVersion='?', sGarantiaExt=? WHERE gralVersId=?</query>
+  </Command>
+  <Command id="idsVersGeneralPorGModeloIdDB">
+    <query>SELECT GROUP_CONCAT(gralVersId) as idsGralVers FROM version_generales WHERE gModeloId IN (?)</query>
+  </Command>
+  <Command id="EliminarVersionGeneralDB">
+    <query>DELETE FROM version_generales WHERE gralVersId IN (?)</query>
+  </Command>
+  <Command id="OrdenarVersionesDB">
+    <query>UPDATE version_generales SET orden=? WHERE gralVersId=?</query>
+  </Command>
+    
+
+  <!--Consultas versiones colores -->
+  <Command id="versionColorPorIdDB">
+    <query>SELECT * FROM version_colores WHERE coloresVersId=?</query>
+  </Command>
+  <Command id="ObtVersionesColoresDB">
+    <query>SELECT *, IF(activo=1,'oculto','') as classActivo, IF(activo=0,'oculto','') as classInactivo, IF(porDefecto=1,'checked','') as classPorDefecto FROM version_colores ?</query>
+  </Command>
+
+  <Command id="ActCampoVersionColorDB">
+    <query>UPDATE version_colores SET ?='?' WHERE coloresVersId=?</query>
+  </Command>
+
+  <Command id="InsertVersionColorDB">
+    <query>
+      INSERT INTO version_colores(gralVersId, color, imagenAuto, imagenColor, fechaCreacion) VALUES (?, '?', '?', '?', '?')
+    </query>
+  </Command>
+
+  <Command id="ActVersionColorDB">
+    <query>UPDATE version_colores SET gralVersId=?, color='?', imagenAuto='?', imagenColor='?'  WHERE coloresVersId=?</query>
+  </Command>
+
+  <Command id="eliminarVersionColorDB">
+    <query>DELETE FROM version_colores WHERE coloresVersId IN (?)</query>
+  </Command>
+  <Command id="desactivarPorGralVersDB">
+    <query>UPDATE version_colores SET ?=? WHERE gralVersId=?</query>
+  </Command>
+  <Command id="idsColoresVersPorIdsVersionDB">
+    <query>SELECT GROUP_CONCAT(coloresVersId) as idsColoresVers FROM version_colores WHERE gralVersId IN (?)</query>
+  </Command>
+  
+  
+  
+
+  <!--Consultas versiones planes -->
+  <Command id="versionPlanPorIdDB">
+    <query>
+      SELECT a.*, b.plan as conceptoPlan, IF(a.activo=1,'oculto','') as classActivo, IF(a.activo=0,'oculto','') as classInactivo
+      FROM version_planes as a
+      LEFT JOIN cat_concepto_planes as b ON b.planId=a.planId
+      WHERE a.planVersId=?
+    </query>
+  </Command>
+  <Command id="ObtVersionesPlanesDB">
+    <query>
+      SELECT a.*, b.plan as conceptoPlan, IF(a.activo=1,'oculto','') as classActivo, IF(a.activo=0,'oculto','') as classInactivo
+      FROM version_planes as a
+      LEFT JOIN cat_concepto_planes as b ON b.planId=a.planId
+      ?
+    </query>
+  </Command>
+
+  <Command id="deleteVersionesPlanesGrid">
+    <query>DELETE FROM version_planes WHERE planVersId=@planVersId </query>
+  </Command>
+
+  <Command id="ActCampoVersionPlanDB">
+    <query>UPDATE version_planes SET ?='?' WHERE planVersId=? </query>
+  </Command>
+
+  <Command id="InsertVersionPlanDB">
+    <query>INSERT INTO version_planes(gralVersId, planId, caracteristicas, preconfigurado, planVersIdPadre, fechaCreacion) VALUES(?, ?, '?', '?', '?', '?') </query>
+  </Command>
+
+  <Command id="ActVersionPlanDB">
+    <query>UPDATE version_planes SET gralVersId=?, planId=?, caracteristicas='?', preconfigurado='?', planVersIdPadre='?' WHERE planVersId=?</query>
+  </Command>
+  <Command id="idsPlanesVersPorIdsVersionDB">
+    <query>SELECT GROUP_CONCAT(planVersId) as idsPlanVers FROM version_planes WHERE gralVersId IN (?)</query>
+  </Command>
+  <Command id="EliminarVersionPlanDB">
+    <query>DELETE FROM version_planes WHERE planVersId IN (?)</query>
+  </Command>
+  <Command id="versionPlanPorIdPadreDB">
+    <query>SELECT * FROM version_planes WHERE planVersIdPadre IN (?)</query>
+  </Command>
+  <Command id="EliminarVersionPlanPorIdPadreDB">
+    <query>DELETE FROM version_planes WHERE planVersIdPadre=?</query>
+  </Command>
+  <Command id="ObtVariosPlanesPorIdDB">
+    <query>
+      SELECT a.*, b.plan as conceptoPlan 
+      FROM version_planes AS a
+      LEFT JOIN cat_concepto_planes as b ON b.planId=a.planId
+      WHERE a.planVersId IN (?)
+    </query>
+  </Command>
+
+
+
+
+  <!--Consultas versiones precios -->
+  <Command id="versionPrecioPorIdDB">
+    <query>SELECT * FROM version_precios WHERE precioVersId=?</query>
+  </Command>
+  <Command id="ObtVersionesPreciosDB">
+    <query>
+        SELECT a.*, b.concepto as conceptoPrecio, IF(a.activo=1,'oculto','') as classActivo, IF(a.activo=0,'oculto','') as classInactivo,
+        c.transmision
+        FROM version_precios as a
+        LEFT JOIN cat_concepto_precios as b ON b.concPrecioId=a.concPrecioId 
+        LEFT JOIN cat_transmisiones as c ON c.transmisionId=a.transmisionId       
+	? ?
+    </query>
+  </Command>
+
+
+  <Command id="insertVersionPrecioGrid">
+    <query>INSERT INTO version_precios(gralVersId, concPrecioId, precio, activo, fechaCreacion, transmisionId) VALUES(?, @concPrecioId, @precio, @activo, NOW(), @transmisionId)</query>
+  </Command>
+  <Command id="updateVersionPrecioGrid">
+    <query>UPDATE version_precios SET gralVersId=?, concPrecioId=@concPrecioId, precio=@precio, activo=@activo, transmisionId=@transmisionId WHERE precioVersId=@precioVersId</query>
+  </Command>
+
+  <Command id="deleteVersionPrecioGrid">
+    <query>DELETE FROM version_precios WHERE precioVersId=@precioVersId</query>
+  </Command>
+  <Command id="ActCampoVersionPrecioDB">
+    <query>UPDATE version_precios SET ?='?' WHERE precioVersId=? </query>
+  </Command>
+  <Command id="idsPreciosVersPorIdsVersionDB">
+    <query>SELECT GROUP_CONCAT(precioVersId) as idsPrecioVers FROM version_precios WHERE gralVersId IN (?)</query>
+  </Command>
+  <Command id="EliminarVersionPrecioDB">
+    <query>DELETE FROM version_precios WHERE precioVersId IN (?)</query>
+  </Command>
+
+
+
+
+  <!--Consultas versiones requisitos -->
+  <Command id="versionRequisitoPorIdDB">
+    <query>SELECT * FROM version_requisitos WHERE reqVersId IN (?)</query>
+  </Command>
+  <Command id="ObtVersionesRequisitosDB">
+    <query>SELECT *, IF(activo=1,'oculto','') as classActivo, IF(activo=0,'oculto','') as classInactivo FROM version_requisitos ?</query>
+  </Command>
+
+  <Command id="ActCampoVersionReqDB">
+    <query>UPDATE version_requisitos SET ?='?' WHERE reqVersId=?</query>
+  </Command>
+  <Command id="deleteVersionesRequisitosGrid">
+    <query>DELETE FROM version_requisitos WHERE reqVersId=@reqVersId</query>
+  </Command>
+
+  <Command id="InsertVersionReqDB">
+    <query>INSERT INTO version_requisitos(gralVersId, concepto, caracteristicas, preconfigurado, fechaCreacion) VALUES(?, '?', '?', '?', '?') </query>
+  </Command>
+
+  <Command id="ActVersionReqDB">
+    <query>UPDATE version_requisitos SET gralVersId=?, concepto='?', caracteristicas='?', preconfigurado='?' WHERE reqVersId=?</query>
+  </Command>
+  <Command id="idsReqVersPorIdsVersionDB">
+    <query>SELECT GROUP_CONCAT(reqVersId) as idsReqVers FROM version_requisitos WHERE gralVersId IN (?)</query>
+  </Command>
+  <Command id="EliminarVersionRequisitoDB">
+    <query>DELETE FROM version_requisitos WHERE reqVersId IN (?)</query>
+  </Command>
+
+
+
+  <!--Consultas versiones zonas -->
+  <Command id="versionZonaPorIdDB">
+    <query>SELECT * FROM version_zonas WHERE zonaVersId=?</query>
+  </Command>
+
+  <Command id="versionZonaPorColorGaleriaDB">
+    <query>SELECT * FROM version_zonas WHERE coloresVersId=? AND galeriaId=?</query>
+  </Command>
+
+  <Command id="ObtVersionesZonasDB">
+    <query>
+      SELECT a.*, b.nombre as conceptoGaleria, IF(a.activo=1,'oculto','') as classActivo, IF(a.activo=0,'oculto','') as classInactivo
+      FROM version_zonas as a
+      LEFT JOIN cat_galerias as b on b.galeriaId=a.galeriaId
+      ?
+    </query>
+  </Command>    
+
+  <Command id="InsertVersionZonaDB">
+    <query>
+      INSERT INTO version_zonas(coloresVersId, galeriaId, fechaCreacion) VALUES(?, ?, '?')
+    </query>
+  </Command>
+
+  <Command id="ActVersionZonaDB">
+    <query>
+      UPDATE version_zonas SET coloresVersId=?, galeriaId=? WHERE zonaVersId=?
+    </query>
+  </Command>
+
+  <Command id="ActCampoVersionZonaDB">
+    <query>
+      UPDATE version_zonas SET ?='?' WHERE zonaVersId=?
+    </query>
+  </Command>
+
+  <Command id="ObtVersionesZonasGridDB">
+    <query>
+      SELECT 
+        A.*, B.color 
+      FROM version_zonas A
+      LEFT JOIN version_colores B ON A.coloresVersId=B.coloresVersId
+      ?
+    </query>
+  </Command>
+
+  <Command id="EliminarVersionZonaDB">
+    <query>
+      DELETE FROM version_zonas WHERE zonaVersId IN (?)
+    </query>
+  </Command>
+  <Command id="idsZonasVersPorIdsColorDB">
+    <query>SELECT GROUP_CONCAT(zonaVersId) as idsZonaVers FROM version_zonas WHERE coloresVersId IN (?)</query>
+  </Command>
+  
+
+
+  <!--Consultas versiones zonas activas -->
+  <Command id="versionZonaActivaPorIdDB">
+    <query>SELECT * FROM version_zonasactivas WHERE activaZonaId=?</query>
+  </Command>
+
+  <Command id="versionZonaActivaPorZonaDB">
+    <query>SELECT * FROM version_zonasactivas WHERE zonaVersId=?</query>
+  </Command>
+
+
+ 
+
+   <Command id="InsertVersionZonaActivaDB">
+    <query>
+      INSERT INTO version_zonasactivas(zonaVersId, coordenada, fechaCreacion) VALUES(?, '?', '?')
+    </query>
+  </Command>
+
+  <Command id="ActVersionZonaActivaDB">
+    <query>
+      UPDATE version_zonasactivas SET zonaVersId=?, coordenada='?' WHERE activaZonaId=?
+    </query>
+  </Command>
+
+  <Command id="ActCampoVersionZonaADB">
+    <query>
+      UPDATE version_zonasactivas SET ?='?' WHERE activaZonaId=?
+    </query>
+  </Command>
+
+  <Command id="EliminarVersionZonaActivaDB">
+    <query>
+      DELETE FROM version_zonasactivas WHERE zonaVersId IN (?)
+    </query>
+  </Command>
+  <Command id="ObtVersionesZonasActivasDB">
+    <query>SELECT * FROM version_zonasactivas ?</query>
+  </Command>
+  <Command id="idsZonasActivasVersPorIdsZonaDB">
+    <query>SELECT GROUP_CONCAT(activaZonaId) as idsZonaActivaVers FROM version_zonasactivas WHERE zonaVersId IN (?)</query>
+  </Command>
+  
+  
+  
+  <!--Consultas catalogo de prospectos -->
+  <Command id="insertarProspectoDB">
+    <query>INSERT INTO cat_prospectos(usuarioId, nombre, direccion, telefono, email, datosJson, fechaAlta, fechaCreacion) VALUES(?, '?', '?', '?', '?', '?', '?', '?')</query>
+  </Command>
+  <Command id="getProspectosGrid">
+    <query>       
+      SELECT A.*, C.nombre as agencia 
+      FROM cat_prospectos as A 
+      LEFT JOIN usuarios as B on B.idUsuario=A.usuarioId 
+      LEFT JOIN cat_agencias as C on C.agenciaId=B.agenciaId
+      ?
+      ORDER BY A.prospectoId      
+    </query>
+  </Command>
+  <Command id="datosProspectoPorEmailDB">
+    <query>SELECT * FROM cat_prospectos WHERE email='?'</query>
+  </Command>
+  <Command id="actualizarProspectoDB">
+    <query>UPDATE cat_prospectos SET usuarioId=?, nombre='?', direccion='?', telefono='?', email='?', datosJson='?', fechaAlta='?' WHERE prospectoId=?</query>
+  </Command>
+  <Command id="datosProspectoPorIdDB">
+    <query>SELECT * FROM cat_prospectos WHERE prospectoId=?</query>
+  </Command>
+  <Command id="obtTodosProspectosPorUsuarioDB">
+    <query>SELECT * FROM cat_prospectos ?</query>
+  </Command>
+  <Command id="EliminarProspectoPorIdDB">
+    <query>DELETE FROM cat_prospectos WHERE prospectoId=?</query>
+  </Command>
+  
+
+
+  
+  <!--Consultas catalogo de prospectos -->
+  <Command id="ObtActualizacionesDB">
+    <query>SELECT * FROM cat_actualizaciones</query>
+  </Command>
+  <Command id="ObtDatosActualizacionPorTablaDB">
+    <query>SELECT * FROM cat_actualizaciones WHERE tabla='?'</query>
+  </Command>
+
+   <Command id="updActualizacionDB">
+    <query>UPDATE cat_actualizaciones SET fechaActualizacion='?' WHERE tabla='?'</query>
+  </Command>
+  
+  
+  
+
+
+
+
+
+   <!-- <Command id="insertUsuarioDB">
+    <query>INSERT INTO usuarios (idRol, nombre, email, password, numContrato, fechaCreacion, codEmpleado) VALUES (?,'?', '?', '?', '?', ? ,'?','?')</query>
+   </Command>
+   <Command id="updateUsuarioDB">
+    <query>UPDATE usuarios SET ?='?' WHERE idUsuario=?</query>
+   </Command>      
+   
+   <Command id="UserByContractEmailDB">
+    <query>SELECT * FROM usuarios WHERE numContrato='?' AND email='?' </query>
+   </Command>--> 
+   <Command id="obtUsuariosByIdRolDB">
+    <query>SELECT A.* FROM usuarios A ? </query>
+   </Command>      
+        
+    
+
+
+  <!--Consultas sesiones invalidas -->
+  <!--
+    <Command id="getSesInvForGrid">
+    <query> SELECT *,DATE_FORMAT(fechaCreacion, "%d/%m/%Y") AS 'fechaCreacion2' FROM sesiones_invalidas</query>
+   </Command>
+   <Command id="insertSesionInvalidaDB">
+    <query>INSERT INTO sesiones_invalidas (email, password, numContrato, fechaCreacion) VALUES ('?', '?', '?', '?')</query>
+   </Command>
+  -->
+  
+
+   <!--Consultas historial -->    
+   <!--
+    <Command id="insertarRegDispositivoDB">
+      <query>INSERT INTO registro_dispositivos (usuarioId, idRegDispositivo, activo, plataforma, fechaCreacion) VALUES (?, '?', '?', '?', '?')</query>
+    </Command>
+    <Command id="ObtRegDispositivoPorIdRegDB">
+      <query>SELECT * FROM registro_dispositivos WHERE idRegDispositivo='?' AND usuarioId=?</query>
+    </Command>
+    <Command id="obtTodosRegDispositivoPorIdUsrDB">
+      <query>SELECT * FROM registro_dispositivos WHERE activo=1 AND usuarioId=?</query>
+    </Command>
+    <Command id="ActRegActivoDB">
+      <query>UPDATE registro_dispositivos SET idRegDispositivo='?', activo='?', plataforma='?' WHERE idReg=?</query>
+    </Command>
+   -->
+
+
+
+   <!--Consultas catConfiguraciones -->
+   <Command id="ObtTodasConfiguracionesDB">
+    <query> SELECT * FROM cat_configuraciones ? ?</query>
+   </Command>
+   <Command id="ConfiguracionByID">
+    <query>SELECT * FROM cat_configuraciones WHERE idConfiguracion=?</query>
+   </Command>
+   <Command id="updateConfiguracionDB">
+    <query> UPDATE cat_configuraciones SET nombre='?', valor='?' WHERE idConfiguracion=?</query>
+   </Command>
+
+   
+  
+   
+   <!--Consultas cat estados -->
+   <Command id="ObtTodosEstadosDB">
+    <query> SELECT *  FROM cat_estados ?</query>
+   </Command>
+   <Command id="EstadoByID">
+    <query>SELECT * FROM cat_estados WHERE idEstado=?</query>
+   </Command>
+   <Command id="insertEstadoDB">
+    <query> INSERT INTO cat_estados(estado, clave,  pais) VALUES('?','?', '?')</query>
+   </Command>
+   <Command id="updateEstadoDB">
+    <query> UPDATE cat_estados SET ?='?' WHERE idEstado=?</query>
+   </Command>
+
+
+   <!--  Consultas ayudas -->
+   <Command id="ObtTodosCatAyudasDB">
+    <query>SELECT * FROM cat_ayudas ORDER BY idAyuda</query>
+   </Command>
+
+
+   <!--Consultas cat transmisiones -->
+   <Command id="ObtDatosTransmisionPorIdDB">
+    <query>SELECT * FROM cat_transmisiones WHERE transmisionId=?</query>
+   </Command>
+   <Command id="ObtTodosTransmisionesDB">
+    <query>SELECT * FROM cat_transmisiones ?</query>
+   </Command>
+   <Command id="actTransmisionGrid">
+    <query>UPDATE cat_transmisiones SET transmision='@transmision', activo='@activo'  WHERE transmisionId=@transmisionId</query>
+   </Command>
+   <Command id="insTransmisionGrid">
+    <query>INSERT INTO cat_transmisiones(transmision, activo, fechaCreacion) VALUES('@transmision', '@activo', NOW())</query>
+   </Command>
+   <Command id="eliminarTransmisionGrid">
+    <query>DELETE FROM cat_transmisiones WHERE transmisionId=@transmisionId</query>
+   </Command>
+
+
+
+
+   <!--  Consultas galeria modelos -->
+  <Command id="galeriaModeloPorIdDB">
+    <query>SELECT * FROM galeria_modelos WHERE galeriaModeloId=? </query>
+  </Command>
+  <Command id="ObtGaleriasModeloDB">
+    <query>
+      SELECT a.*, IF(a.activo=1,'oculto','') as classActivo, IF(a.activo=0,'oculto','') as classInactivo, b.nombre as galeria 
+      FROM galeria_modelos AS a 
+      LEFT JOIN cat_galerias AS b ON b.galeriaId=a.galeriaId 
+      ? 
+    </query>
+  </Command>
+  <Command id="InsertGaleriaModeloDB">
+    <query>
+      INSERT INTO galeria_modelos(gModeloId, galeriaId, titulo, descripcion, imagen, precio, activo, fechaCreacion) VALUES(?, ?, '?', '?', '?', '?', '?', '?')
+    </query>
+  </Command>
+  <Command id="ActGaleriaModeloDB">
+    <query>
+      UPDATE galeria_modelos SET gModeloId=?, galeriaId=?, titulo='?', descripcion='?', imagen='?', precio='?', activo='?'  WHERE galeriaModeloId=?
+    </query>
+  </Command>  
+  <Command id="EliminarGaleriaModeloDB">
+     <query>DELETE FROM galeria_modelos WHERE galeriaModeloId IN (?)</query>
+  </Command>
+  <Command id="ActCampoGaleriaModeloDB">
+    <query>UPDATE galeria_modelos SET ?='?' WHERE galeriaModeloId=?</query>
+  </Command>
+
+
+
+  <!--  Consultas tasas -->
+  <Command id="ObtTodasTasasDB">
+    <query>SELECT * FROM cat_tasas ?</query>
+  </Command>
+  <Command id="actTasaGrid">
+    <query>UPDATE cat_tasas SET nombre='@nombre', valor=@valor, activo='@activo'  WHERE tasaId=@tasaId</query>
+  </Command>
+  <Command id="insTasaGrid">
+    <query>INSERT INTO cat_tasas(nombre, valor, activo, fechaCreacion) VALUES('@nombre', '@valor', '@activo', NOW())</query>
+  </Command>
+  <Command id="eliminarTasaGrid">
+    <query>DELETE FROM cat_tasas WHERE tasaId=@tasaId</query>
+  </Command>
+
+
+
+  <!--  Consultas promociones -->
+  <Command id="versionPromocionPorIdDB">
+    <query>SELECT * FROM promociones WHERE promocionId=?</query>
+  </Command>
+  <Command id="ObtVersionesPromocionesDB">
+    <query>SELECT *, IF(activo=1,'oculto','') as classActivo, IF(activo=0,'oculto','') as classInactivo FROM promociones ?</query>
+  </Command>
+  <Command id="InsertVersionPromocionDB">
+    <query>INSERT INTO promociones(gralVersId, concepto, caracteristicas, preconfigurado, promocionIdPadre, fechaCreacion) VALUES(?, '?', '?', '?', '?', '?') </query>
+  </Command>
+  <Command id="ActVersionPromocionDB">
+    <query>UPDATE promociones SET gralVersId=?, concepto='?', caracteristicas='?', preconfigurado='?', promocionIdPadre=? WHERE promocionId=?</query>
+  </Command>
+  <Command id="ActCampoVersionPromocionDB">
+    <query>UPDATE promociones SET ?='?' WHERE promocionId=?</query>
+  </Command>
+  <Command id="EliminarVersionPromocionPorIdPadreDB">
+    <query>DELETE FROM promociones WHERE promocionIdPadre=?</query>
+  </Command>
+  <Command id="EliminarVersionPromocionDB">
+    <query>DELETE FROM promociones WHERE promocionId=?</query>
+  </Command>
+  <Command id="versionPromoPorIdPadreDB">
+    <query>SELECT * FROM promociones WHERE promocionIdPadre IN (?)</query>
+  </Command>
+
+
+  <!--  Consultas agencias -->
+  <Command id="ObtTodasAgenciasDB">
+    <query>SELECT * FROM cat_agencias ?</query>
+  </Command>
+  <Command id="actAgenciaGrid">
+    <query>
+        UPDATE cat_agencias SET nombre='@nombre', enlaceCot='@enlaceCot', enlaceBank='@enlaceBank', urlsActivas='@urlsActivas',
+        gtVwsf='@gtVwsf', correoGtvwsf='@correoGtvwsf', gtVentas='@gtVentas', correoGtVentas='@correoGtVentas', gtGral='@gtGral', correoGtGral='@correoGtGral'
+        WHERE agenciaId=@agenciaId
+    </query>
+  </Command>
+  <Command id="insAgenciaGrid">
+    <query>
+      INSERT INTO cat_agencias(nombre, enlaceCot, activo, fechaCreacion, enlaceBank, urlsActivas, gtVwsf, correoGtvwsf, gtVentas, correoGtVentas, gtGral, correoGtGral) 
+      VALUES('@nombre', '@enlaceCot', '1', NOW(), '@enlaceBank', '@urlsActivas', '@gtVwsf', '@correoGtvwsf', '@gtVentas', '@correoGtVentas', '@gtGral', '@correoGtGral')
+    </query>
+  </Command>
+  <Command id="eliminarAgenciaGrid">
+    <query>DELETE FROM cat_agencias WHERE agenciaId=@agenciaId</query>
+  </Command>
+  <Command id="AgenciaPorIdDB">
+    <query>SELECT * FROM cat_agencias WHERE agenciaId=?</query>
+  </Command>
+
+  
+  <!--  
+  <Command id="deleteVersionesRequisitosGrid">
+    <query>DELETE FROM version_requisitos WHERE reqVersId=@reqVersId</query>
+  </Command>
+  
+  <Command id="idsReqVersPorIdsVersionDB">
+    <query>SELECT GROUP_CONCAT(reqVersId) as idsReqVers FROM version_requisitos WHERE gralVersId IN (?)</query>
+  </Command>
+  <Command id="EliminarVersionRequisitoDB">
+    <query>DELETE FROM version_requisitos WHERE reqVersId IN (?)</query>
+  </Command> -->
+  
+
+  <!--  Consultas video modelos -->
+  <Command id="videoModeloPorIdDB">
+    <query>SELECT * FROM video_modelos WHERE galeriaModeloId=? </query>
+  </Command>
+  <Command id="ObtVideosModeloDB">
+    <query>
+      SELECT a.*, IF(a.activo=1,'oculto','') as classActivo, IF(a.activo=0,'oculto','') as classInactivo
+      FROM video_modelos AS a       
+      ? 
+    </query>
+  </Command>
+  <Command id="InsertVideoModeloDB">
+    <query>
+      INSERT INTO video_modelos(gModeloId, titulo, descripcion, url, activo, fechaCreacion) VALUES(?, '?', '?', '?', '?', '?')
+    </query>
+  </Command>
+  <Command id="ActVideoModeloDB">
+    <query>
+      UPDATE video_modelos SET gModeloId=?, titulo='?', descripcion='?', url='?', activo='?'  WHERE videoModeloId=?
+    </query>
+  </Command>  
+  <Command id="EliminarVideoModeloDB">
+     <query>DELETE FROM video_modelos WHERE videoModeloId IN (?)</query>
+  </Command>
+  <Command id="ActCampoVideoModeloDB">
+    <query>UPDATE video_modelos SET ?='?' WHERE videoModeloId=?</query>
+  </Command>
+
+
+</Commands>

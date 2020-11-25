@@ -1,0 +1,46 @@
+/* 
+	A couple styles to make the demo page look good
+ */
+/*.row {
+	margin-bottom: 1rem;
+}*/
+[class*="col-"] {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+hr {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+#files {
+    overflow-y: scroll !important;
+    min-height: 150px !important;
+    /*border: 1px solid #ccc;   */
+    border: 1px solid rgba(0,0,0,.125);
+}
+@media (min-width: 768px) {
+	#files {
+		min-height: 0;
+	}
+}
+#debug {
+	overflow-y: scroll !important;
+	height: 180px;	
+}
+.dm-uploader {
+	border: 0.25rem dashed #A5A5C7;
+	text-align: center;
+	height: 190px;
+}
+.dm-uploader.active {
+	border-color: red;
+	border-style: solid;
+}
+
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    /*border-bottom: 1px solid rgba(0,0,0,.125);*/
+}

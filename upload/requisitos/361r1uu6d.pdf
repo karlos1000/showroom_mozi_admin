@@ -1,0 +1,139 @@
+%PDF-1.3
+1 0 obj
+<< /Type /Catalog
+/Outlines 2 0 R
+/Pages 3 0 R >>
+endobj
+2 0 obj
+<< /Type /Outlines /Count 0 >>
+endobj
+3 0 obj
+<< /Type /Pages
+/Kids [6 0 R
+]
+/Count 1
+/Resources <<
+/ProcSet 4 0 R
+/Font << 
+/F1 8 0 R
+>>
+>>
+/MediaBox [0.000 0.000 612.000 792.000]
+ >>
+endobj
+4 0 obj
+[/PDF /Text ]
+endobj
+5 0 obj
+<<
+/Creator (DOMPDF)
+/CreationDate (D:20161229005612+01'00')
+/ModDate (D:20161229005612+01'00')
+>>
+endobj
+6 0 obj
+<< /Type /Page
+/Parent 3 0 R
+/Contents 7 0 R
+>>
+endobj
+7 0 obj
+<<
+/Length 2346 >>
+stream
+
+0.000 0.000 0.000 rg
+BT 243.068 728.332 Td /F1 15.0 Tf  [(COTIZACIÓN # 14)] TJ ET
+0.867 0.867 0.867 RG
+0.75 w 0 J [  ] 0 d
+35.891 683.052 53.101 24.742 re S
+BT 42.266 693.788 Td /F1 8.2 Tf  [(Cliente:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 683.052 173.749 24.742 re S
+BT 97.616 691.826 Td /F1 8.2 Tf  [(Maria)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 656.060 53.101 24.742 re S
+BT 42.266 666.796 Td /F1 8.2 Tf  [(Destino:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 656.060 173.749 24.742 re S
+BT 97.616 664.834 Td /F1 8.2 Tf  [(19.033841693047453,-98.1945989793457)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 629.068 53.101 24.742 re S
+BT 42.266 639.804 Td /F1 8.2 Tf  [(Cantidad:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 629.068 173.749 24.742 re S
+BT 97.616 637.842 Td /F1 8.2 Tf  [(2)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 602.076 53.101 24.742 re S
+BT 42.266 612.812 Td /F1 8.2 Tf  [(Metros)] TJ ET
+BT 67.478 616.058 Td /F1 7.3 Tf  [(\(3\))] TJ ET
+BT 76.439 612.812 Td /F1 8.2 Tf  [(:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 602.076 173.749 24.742 re S
+BT 97.616 610.850 Td /F1 8.2 Tf  [(7)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 575.084 53.101 24.742 re S
+BT 42.266 585.820 Td /F1 8.2 Tf  [(Concepto:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 575.084 173.749 24.742 re S
+BT 97.616 583.858 Td /F1 8.2 Tf  [(Arena)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 548.092 53.101 24.742 re S
+BT 42.266 558.828 Td /F1 8.2 Tf  [(Proveedor:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 548.092 173.749 24.742 re S
+BT 97.616 556.866 Td /F1 8.2 Tf  [(Material 2)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 521.101 53.101 24.742 re S
+BT 42.266 531.836 Td /F1 8.2 Tf  [(Origen:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 521.101 173.749 24.742 re S
+BT 97.616 529.874 Td /F1 8.2 Tf  [(19.041346787632374,-98.18734628616943)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 494.109 53.101 24.742 re S
+BT 42.266 504.844 Td /F1 8.2 Tf  [(Factor:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 494.109 173.749 24.742 re S
+BT 97.616 502.882 Td /F1 8.2 Tf  [(10)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 467.117 53.101 24.742 re S
+BT 42.266 477.852 Td /F1 8.2 Tf  [(Km:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 467.117 173.749 24.742 re S
+BT 97.616 475.890 Td /F1 8.2 Tf  [(1.06)] TJ ET
+0.75 w 0 J [  ] 0 d
+35.891 440.125 53.101 24.742 re S
+BT 42.266 450.860 Td /F1 8.2 Tf  [(Total:)] TJ ET
+0.75 w 0 J [  ] 0 d
+91.241 440.125 173.749 24.742 re S
+BT 97.616 448.898 Td /F1 8.2 Tf  [(63.45)] TJ ET
+endstream
+endobj
+8 0 obj
+<< /Type /Font
+/Subtype /Type1
+/Name /F1
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+>>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000009 00000 n 
+0000000074 00000 n 
+0000000120 00000 n 
+0000000274 00000 n 
+0000000303 00000 n 
+0000000417 00000 n 
+0000000480 00000 n 
+0000002878 00000 n 
+trailer
+<<
+/Size 9
+/Root 1 0 R
+/Info 5 0 R
+>>
+startxref
+2985
+%%EOF
